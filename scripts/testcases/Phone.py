@@ -31,23 +31,23 @@ class PhoneTest(unittest.TestCase):
         '''
         #step1
     	#d(text='Phone').click.wait()
-        os.system('adb shell am start '+self.runComponent)
-    	assert d(description='Phone').wait.exists(), 'Dialer launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+    	assert d(description = 'Phone').wait.exists(), 'Dialer launch failed'
         #step2
-    	d(description='Phone').click.wait()
+    	d(description = 'Phone').click.wait()
         #step3
-    	d(description='one').click.wait()
-    	d(description='zero').click.wait()
-    	d(description='zero').click.wait()
-    	d(description='one').click.wait()
-    	d(description='zero').click.wait()
-    	d(description='dial').click.wait()
+    	d(description = 'one').click.wait()
+    	d(description = 'zero').click.wait()
+    	d(description = 'zero').click.wait()
+    	d(description = 'one').click.wait()
+    	d(description = 'zero').click.wait()
+    	d(description = 'dial').click.wait()
         #step4
-    	assert d(textContains='0:').wait.exists(timeout=10000), 'Call failed'
+    	assert d(textContains = '0:').wait.exists(timeout = 10000), 'Call failed'
         time.sleep(10)
         #step5
-    	d(description='End').click.wait()
-    	assert d(description='Phone').wait.exists(), 'Call end failed'
+    	d(description = 'End').click.wait()
+    	assert d(description = 'Phone').wait.exists(), 'Call end failed'
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

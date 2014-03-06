@@ -30,11 +30,11 @@ class BrowserTest(unittest.TestCase):
         Steps:1.Launch Browser and check launch successfully
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
+        os.system('adb shell am start ' + self.runComponent)
         d.press('menu')
-    	assert d(text='Bookmarks').wait.exists(), 'Browser launch failed'
+    	assert d(text = 'Bookmarks').wait.exists(), 'Browser launch failed'
 
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

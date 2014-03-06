@@ -33,18 +33,18 @@ class MessagesTest(unittest.TestCase):
               6. Exit Messages app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Messaging').wait.exists(), 'Message launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
         #step2,3
-        os.system('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER +' --es sms_body ' + SEND_MESSAGE_CONTENT +' -n com.android.mms/.ui.ComposeMessageActivity')
+        os.system('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
 
         #step4
-        d(description='Send').click.wait()
-        assert d(textContains=':', className='android.widget.TextView').wait.exists(timeout=35000), 'Message send failed'
+        d(description = 'Send').click.wait()
+        assert d(textContains = ':', className = 'android.widget.TextView').wait.exists(timeout = 35000), 'Message send failed'
 
         #step5
         d.press('back')
@@ -96,18 +96,18 @@ class MessagesTest(unittest.TestCase):
               9. Exit Messages app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Messaging').wait.exists(), 'Message launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
         #step2,3,4,5,6
-        os.system('adb shell am start -a android.intent.action.SEND -t video/* --es address '+ MESSAGE_RECEIVER_NUMBER +' --es sms_body '+ SEND_MESSAGE_CONTENT +' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
-        assert d(text='View').wait.exists(), 'message create failed'
+        os.system('adb shell am start -a android.intent.action.SEND -t video/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
+        assert d(text = 'View').wait.exists(), 'message create failed'
 
         #step7
-        d(description='Send MMS').click.wait()
-        assert d(textContains=':', className='android.widget.TextView').wait.exists(timeout=60000), 'Message send failed'
+        d(description = 'Send MMS').click.wait()
+        assert d(textContains = ':', className = 'android.widget.TextView').wait.exists(timeout = 60000), 'Message send failed'
 
         #step8
         d.press('back')
@@ -128,18 +128,18 @@ class MessagesTest(unittest.TestCase):
               9. Exit Messages app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Messaging').wait.exists(), 'Message launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
         #step2,3,4,5,6
-        os.system('adb shell am start -a android.intent.action.SEND -t image/* --es address '+ MESSAGE_RECEIVER_NUMBER +' --es sms_body '+ SEND_MESSAGE_CONTENT +' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
-        assert d(text='View').wait.exists(), 'message create failed'
+        os.system('adb shell am start -a android.intent.action.SEND -t image/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
+        assert d(text = 'View').wait.exists(), 'message create failed'
 
         #step7
-        d(description='Send MMS').click.wait()
-        assert d(textContains=':', className='android.widget.TextView').wait.exists(timeout=60000), 'Message send failed'
+        d(description = 'Send MMS').click.wait()
+        assert d(textContains = ':', className = 'android.widget.TextView').wait.exists(timeout = 60000), 'Message send failed'
 
         #step8
         d.press('back')
@@ -159,18 +159,18 @@ class MessagesTest(unittest.TestCase):
               
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Messaging').wait.exists(), 'Message launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
-        os.system('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER +' --es sms_body ' + SEND_MESSAGE_CONTENT +' -n com.android.mms/.ui.ComposeMessageActivity')
+        os.system('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
         d.press('back')
 
         #step2
-        d(textContains='test').click.wait()
-        assert d(description='Send').wait.exists(), 'SMS open failed'
+        d(textContains = 'test').click.wait()
+        assert d(description = 'Send').wait.exists(), 'SMS open failed'
 
         #step3
         d.press('back')
@@ -229,18 +229,18 @@ class MessagesTest(unittest.TestCase):
               
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Messaging').wait.exists(), 'Message launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
-        os.system('adb shell am start -a android.intent.action.SEND -t video/* --es address '+ MESSAGE_RECEIVER_NUMBER +' --es sms_body '+ SEND_MESSAGE_CONTENT +' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
+        os.system('adb shell am start -a android.intent.action.SEND -t video/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
         d.press('back')
 
         #step2
-        d(textContains='subject').click.wait()
-        assert d(description='Send MMS').wait.exists(), 'MMS open failed'
+        d(textContains = 'subject').click.wait()
+        assert d(description = 'Send MMS').wait.exists(), 'MMS open failed'
 
         #step3
         d.press('back')
@@ -260,18 +260,18 @@ class MessagesTest(unittest.TestCase):
               4.Exit message app      
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Messaging').wait.exists(), 'Message launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
-        os.system('adb shell am start -a android.intent.action.SEND -t image/* --es address '+ MESSAGE_RECEIVER_NUMBER +' --es sms_body '+ SEND_MESSAGE_CONTENT +' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
+        os.system('adb shell am start -a android.intent.action.SEND -t image/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
         d.press('back')
 
         #step2
-        d(textContains='subject').click.wait()
-        assert d(description='Send MMS').wait.exists(), 'MMS open failed'
+        d(textContains = 'subject').click.wait()
+        assert d(description = 'Send MMS').wait.exists(), 'MMS open failed'
 
         #step3
         d.press('back')
@@ -281,14 +281,14 @@ class MessagesTest(unittest.TestCase):
 
     def _clearMessage(self):
 
-        if d(text='No conversations.').wait.exists():
+        if d(text = 'No conversations.').wait.exists():
             assert True
         else:
             d.press('menu')
-            d(text='Delete all threads').click.wait()
-            d(text='Delete').click.wait()
-            assert d(text='No conversations.').wait.exists(), 'message delete failed'
+            d(text = 'Delete all threads').click.wait()
+            d(text = 'Delete').click.wait()
+            assert d(text = 'No conversations.').wait.exists(), 'message delete failed'
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

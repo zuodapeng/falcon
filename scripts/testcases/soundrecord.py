@@ -28,19 +28,19 @@ class ContactTest(unittest.TestCase):
               5. Exit Music app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Record your message').wait.exists(), 'SoundRecorder launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Record your message').wait.exists(), 'SoundRecorder launch failed'
 
         #Step2
-        d(index=0, className='android.widget.ImageButton').click.wait(timeout=5000)
-        assert d(text='Recording').wait.exists(), 'not recording'
+        d(index = 0, className = 'android.widget.ImageButton').click.wait(timeout = 5000)
+        assert d(text = 'Recording').wait.exists(), 'not recording'
         #step3
-        d(index=2, className='android.widget.ImageButton').click.wait()
-        assert d(text='Done').wait.exists(), 'recording save failed'
+        d(index = 2, className = 'android.widget.ImageButton').click.wait()
+        assert d(text = 'Done').wait.exists(), 'recording save failed'
         #step4
-        d(text='Done').click.wait()
+        d(text = 'Done').click.wait()
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()
 

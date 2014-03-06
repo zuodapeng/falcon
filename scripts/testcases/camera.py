@@ -29,18 +29,18 @@ class CameraTest(unittest.TestCase):
               3. Exit Camera app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Shutter button').wait.exists(), 'Camera launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Shutter button').wait.exists(), 'Camera launch failed'
 
-        result1=os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
+        result1 = os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
 
         #step2
-        d(description='Shutter button').click.wait(timeout=3000)
+        d(description = 'Shutter button').click.wait(timeout=3000)
 
         #step3
-        result2=os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
+        result2 = os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
 
-        if int(result2) == int(result1) +1:
+        if int(result2) == int(result1) + 1:
             assert True
         else:
             assert False, 'Capture failed'
@@ -53,15 +53,15 @@ class CameraTest(unittest.TestCase):
               3. Exit Camera app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Shutter button').wait.exists(), 'Camera launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Shutter button').wait.exists(), 'Camera launch failed'
 
         #Step2
-        d.swipe(520,500,120,500,steps=10)
+        d.swipe(520,500,120,500,steps = 10)
         time.sleep(2)
         d.click(274,482)
         d.press('menu')
-        assert d(text='Delete').wait.exists()
+        assert d(text = 'Delete').wait.exists()
 
     def testDeletePicture(self):
         """
@@ -73,25 +73,25 @@ class CameraTest(unittest.TestCase):
               5. Exit Camera app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Shutter button').wait.exists(), 'Camera launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Shutter button').wait.exists(), 'Camera launch failed'
 
-        result1=os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
+        result1 = os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
 
         #step2
-        d.swipe(520,500,120,500,steps=10)
+        d.swipe(520,500,120,500,steps = 10)
         time.sleep(2)
         d.click(274,482)
 
         #step3
         d.press('menu')
-        assert d(text='Delete').wait.exists()
+        assert d(text = 'Delete').wait.exists()
 
         #step4
-        d(text='Delete').click.wait()
-        d(text='OK').click.wait(timeout=2000)
+        d(text = 'Delete').click.wait()
+        d(text = 'OK').click.wait(timeout = 2000)
 
-        result2=os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
+        result2 = os.popen(QUERY_PICTURE_COUNT_COMMANDS).read()
         if int(result2) == int(result1) - 1:
             assert True
         else:
@@ -105,18 +105,18 @@ class CameraTest(unittest.TestCase):
               3. Exit Camera app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Shutter button').wait.exists(), 'Camera launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Shutter button').wait.exists(), 'Camera launch failed'
 
-        result1=os.popen(QUERY_VIDEO_COUNT_COMMANDS).read()
+        result1 = os.popen(QUERY_VIDEO_COUNT_COMMANDS).read()
 
-        d(description='Camera, video, or panorama selector').click.wait()
-        d(description='Switch to video').click.wait()
-        assert d(description='Shutter button').wait.exists(), 'Video Camera launch failed'
+        d(description = 'Camera, video, or panorama selector').click.wait()
+        d(description = 'Switch to video').click.wait()
+        assert d(description = 'Shutter button').wait.exists(), 'Video Camera launch failed'
 
         #step2
-        d(description='Shutter button').click.wait(timeout=30000)
-        d(description='Shutter button').click.wait(timeout=5000)
+        d(description = 'Shutter button').click.wait(timeout=30000)
+        d(description = 'Shutter button').click.wait(timeout=5000)
 
         result2=os.popen(QUERY_VIDEO_COUNT_COMMANDS).read()
         if int(result2) == int(result1) + 1:
@@ -134,25 +134,25 @@ class CameraTest(unittest.TestCase):
               5. Exit Camera app
         """
         #step1,2
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Shutter button').wait.exists(), 'Camera launch failed'
-        d(description='Camera, video, or panorama selector').click.wait()
-        d(description='Switch to video').click.wait()
-        assert d(description='Shutter button').wait.exists(), 'Video Camera launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Shutter button').wait.exists(), 'Camera launch failed'
+        d(description = 'Camera, video, or panorama selector').click.wait()
+        d(description = 'Switch to video').click.wait()
+        assert d(description = 'Shutter button').wait.exists(), 'Video Camera launch failed'
 
         #step3
-        d.swipe(520,500,120,500,steps=10)
+        d.swipe(520,500,120,500,steps = 10)
         time.sleep(2)
         d.click(274,482)
         d.press('menu')
-        assert d(text='Delete').wait.exists()
+        assert d(text = 'Delete').wait.exists()
 
         #step4
         d.press('back')
         d.click(274,482)
         time.sleep(10)
         d.click(274,482)
-        assert d(index=2, className='android.view.View').wait.exists(), 'Video play failed'
+        assert d(index = 2, className = 'android.view.View').wait.exists(), 'Video play failed'
 
     def testDeleteVideo(self):
         """
@@ -166,24 +166,24 @@ class CameraTest(unittest.TestCase):
         result1=os.popen(QUERY_VIDEO_COUNT_COMMANDS).read()
 
         #step1,2
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Shutter button').wait.exists(), 'Camera launch failed'
-        d(description='Camera, video, or panorama selector').click.wait()
-        d(description='Switch to video').click.wait()
-        assert d(description='Shutter button').wait.exists(), 'Video Camera launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Shutter button').wait.exists(), 'Camera launch failed'
+        d(description = 'Camera, video, or panorama selector').click.wait()
+        d(description = 'Switch to video').click.wait()
+        assert d(description = 'Shutter button').wait.exists(), 'Video Camera launch failed'
 
         #step3
-        d.swipe(520,500,120,500,steps=10)
+        d.swipe(520,500,120,500,steps = 10)
         time.sleep(2)
         d.click(274,482)
 
         #step4
         d.press('menu')
-        assert d(text='Delete').wait.exists()
-        d(text='Delete').click.wait()
-        d(text='OK').click.wait(timeout=2000)
+        assert d(text = 'Delete').wait.exists()
+        d(text = 'Delete').click.wait()
+        d(text = 'OK').click.wait(timeout = 2000)
 
-        result2=os.popen(QUERY_VIDEO_COUNT_COMMANDS).read()
+        result2 = os.popen(QUERY_VIDEO_COUNT_COMMANDS).read()
 
         if int(result2) == int(result1) - 1:
             assert True
@@ -191,5 +191,5 @@ class CameraTest(unittest.TestCase):
             assert False, 'Video record failed'
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

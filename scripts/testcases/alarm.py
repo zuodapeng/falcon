@@ -34,22 +34,25 @@ class AlarmTest(unittest.TestCase):
                 5.Add alarm
         '''
         #step1
-        os.system('adb shell am start '+self.runComponent)
-    	assert d(description='Alarms').wait.exists(), 'Clock launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+    	assert d(description = 'Alarms').wait.exists(), 'Clock launch failed'
 
-    	d(description='Alarms').click.wait()
-    	assert d(text='Alarms').wait.exists(), 'Alarm launch failed'
+    	d(description = 'Alarms').click.wait()
+    	assert d(text = 'Alarms').wait.exists(), 'Alarm launch failed'
+
         #step2
-    	result1=os.popen(QUERY_ALARM_COUNT_COMMANDS)
+    	result1 = os.popen(QUERY_ALARM_COUNT_COMMANDS)
+
     	#step3,4
     	for i in range(0,int(result1.read())):
     		d.swipe(45,158,500,158,steps=10)
-    		assert d(text='Alarm deleted.'), 'Alarm delete failed'
-    	#step5
-    	d(description='Add alarm').click.wait()
-    	d(text='Cancel').click.wait()
+    		assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
 
-    	assert d(text='12').wait.exists(), 'Alarm create failed'
+    	#step5
+    	d(description = 'Add alarm').click.wait()
+    	d(text = 'Cancel').click.wait()
+
+    	assert d(text = '12').wait.exists(), 'Alarm create failed'
 
 
     def testAlarmDelete(self):
@@ -62,23 +65,23 @@ class AlarmTest(unittest.TestCase):
                 4.Delete an alarm
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Alarms').wait.exists(), 'Clock launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Alarms').wait.exists(), 'Clock launch failed'
 
-        d(description='Alarms').click.wait()
-        assert d(text='Alarms').wait.exists(), 'Alarm launch failed'
+        d(description = 'Alarms').click.wait()
+        assert d(text = 'Alarms').wait.exists(), 'Alarm launch failed'
 
         #step2,3
-        result1=os.popen(QUERY_ALARM_COUNT_COMMANDS)
+        result1 = os.popen(QUERY_ALARM_COUNT_COMMANDS)
         if int(result1.read()) == 0:
-            d(description='Add alarm').click.wait()
-            d(text='Cancel').click.wait()
+            d(description = 'Add alarm').click.wait()
+            d(text = 'Cancel').click.wait()
 
         #step4
-        d.swipe(45,158,500,158,steps=10)
-        assert d(text='Alarm deleted.'), 'Alarm delete failed'
+        d.swipe(45,158,500,158,steps = 10)
+        assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
         
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

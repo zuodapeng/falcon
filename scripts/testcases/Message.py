@@ -33,18 +33,18 @@ class MessageTest(unittest.TestCase):
         5. Verify send successfully
         '''
         #step1
-        os.system('adb shell am start '+self.runComponent)
+        os.system('adb shell am start ' + self.runComponent)
     	#d(text='Messaging').click.wait()
-    	assert d(description='New message').wait.exists(), 'Message launch failed'
+    	assert d(description = 'New message').wait.exists(), 'Message launch failed'
         #step2
-    	d(description='New message').click.wait()
+    	d(description = 'New message').click.wait()
         #step3
-        d(text="To").set_text(SMS_RECEIVER)
-        d(text="Type message").set_text(SMS_CONTENT)
-        d(description="Send").click.wait()
+        d(text = "To").set_text(SMS_RECEIVER)
+        d(text = "Type message").set_text(SMS_CONTENT)
+        d(description = "Send").click.wait()
         d.press('back')
-        assert d(textContains=':').wait.exists(timeout=35000), 'SMS send failed'
+        assert d(textContains = ':').wait.exists(timeout = 35000), 'SMS send failed'
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

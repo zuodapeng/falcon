@@ -33,23 +33,23 @@ class ContactTest(unittest.TestCase):
           4. Touch Done button
           5. Exit Contacts app
         """
-        result1=os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        result1 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='All contacts').wait.exists(), 'Contact launch failed'
-        d(description='All contacts').click.wait()
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'All contacts').wait.exists(), 'Contact launch failed'
+        d(description = 'All contacts').click.wait()
 
         #step2
-        d(description='Add Contact').click.wait()
+        d(description = 'Add Contact').click.wait()
 
         #step3
-        d(text="Name").set_text(CONTACT_NAME+random_name)
-        d(text="Phone", className='android.widget.EditText').set_text(PHONE_NUMBER)
+        d(text = "Name").set_text(CONTACT_NAME + random_name)
+        d(text = "Phone", className = 'android.widget.EditText').set_text(PHONE_NUMBER)
 
         #step4
-        d(text='Done').click.wait()
+        d(text = 'Done').click.wait()
 
-        result2=os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        result2 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
 
         if int(result2) == int(result1) + 1:
             assert True
@@ -67,21 +67,21 @@ class ContactTest(unittest.TestCase):
               3. Delete the contact
               4. Exit Contacts app
         """
-        result1=os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        result1 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='All contacts').wait.exists(), 'Contact launch failed'
-        d(description='All contacts').click.wait()
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'All contacts').wait.exists(), 'Contact launch failed'
+        d(description = 'All contacts').click.wait()
 
         #step2
-        d(textContains='test').click.wait()
+        d(textContains = 'test').click.wait()
 
         #step3
         d.press('menu')
-        d(text='Delete').click.wait()
-        d(text='OK').click.wait()
+        d(text = 'Delete').click.wait()
+        d(text = 'OK').click.wait()
 
-        result2=os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        result2 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
 
         if int(result2) == int(result1) - 1:
             assert True
@@ -89,5 +89,5 @@ class ContactTest(unittest.TestCase):
             assert False, 'Contact delete failed'
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

@@ -25,15 +25,15 @@ class NetworkTest(unittest.TestCase):
               2. Check if in 2G mode
               3. If not enter only 2G mode
         """
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Mobile network settings').wait.exists(), 'Mobile network settings launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Mobile network settings').wait.exists(), 'Mobile network settings launch failed'
 
-        if d(text='Use only 2G networks').right(checked='true').wait.exists():
+        if d(text = 'Use only 2G networks').right(checked = 'true').wait.exists():
             pass
         else:
-            d(text='Use only 2G networks').right(className='android.widget.CheckBox').click.wait()
-            assert d(text='Use only 2G networks').right(checked='true').wait.exists()
+            d(text = 'Use only 2G networks').right(className = 'android.widget.CheckBox').click.wait()
+            assert d(text = 'Use only 2G networks').right(checked = 'true').wait.exists()
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

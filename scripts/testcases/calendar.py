@@ -37,24 +37,24 @@ class CalendarTest(unittest.TestCase):
                 6.Verify event is add successfully
 		"""
         #step1
-		os.system('adb shell am start '+self.runComponent)
+		os.system('adb shell am start ' + self.runComponent)
 		d.press('menu')
-		assert d(text='New event').wait.exists(), 'Calendar launch failed'
+		assert d(text = 'New event').wait.exists(), 'Calendar launch failed'
 
         #step2
-		result1=os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
+		result1 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
 		print(result1)
 
         #step3
-		d(text='New event').click.wait()
-		assert d(text='Done').wait.exists(), 'Calendar create failed'
+		d(text = 'New event').click.wait()
+		assert d(text = 'Done').wait.exists(), 'Calendar create failed'
 
         #step4
-		d(text='Event name').set_text(EVENT_NAME)
+		d(text = 'Event name').set_text(EVENT_NAME)
 
         #step5
 		d.click(73,415)
-		d(index=DAY_NUMBER, className='com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
+		d(index = DAY_NUMBER, className = 'com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
 		d.click(275,875)
 		#d(text='Done', className='android.widget.Button').wait.click()
 		time.sleep(1)
@@ -63,7 +63,7 @@ class CalendarTest(unittest.TestCase):
 		time.sleep(2)
 
         #step6
-		result2=os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
+		result2 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
 		print(result2)
 
 		if int(result2) == int(result1) + 1:
@@ -83,19 +83,19 @@ class CalendarTest(unittest.TestCase):
                 6.Verify event number is delete successfully
 		"""
         #step1
-		os.system('adb shell am start '+self.runComponent)
+		os.system('adb shell am start ' + self.runComponent)
 		d.press('menu')
-		assert d(text='New event').wait.exists(), 'Calendar launch failed'
+		assert d(text = 'New event').wait.exists(), 'Calendar launch failed'
 
         #step2
-		result1=os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
+		result1 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
 		print(result1)
 
 		if int(result1) == 0:
-			d(text='New event').click.wait()
-			d(text='Event name').set_text(EVENT_NAME)
+			d(text = 'New event').click.wait()
+			d(text = 'Event name').set_text(EVENT_NAME)
 			d.click(73,415)
-			d(index=DAY_NUMBER, className='com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
+			d(index = DAY_NUMBER, className = 'com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
 			d.click(275,875)
 			time.sleep(1)
 			d.click(400,75)
@@ -103,22 +103,22 @@ class CalendarTest(unittest.TestCase):
 		else:
 			d.press('back')
 
-		result2=os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
+		result2 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
 		print(result2)
 
         #step3
-		d(index=0, className='android.widget.Spinner').click.wait()
-		d(text='Agenda').click.wait()
+		d(index = 0, className = 'android.widget.Spinner').click.wait()
+		d(text = 'Agenda').click.wait()
 
         #step4
-		d(text='AddEvent').click.wait()
+		d(text = 'AddEvent').click.wait()
 
         #step5
-		d(description='Delete').click.wait()
-		d(text='OK').click.wait()
+		d(description = 'Delete').click.wait()
+		d(text = 'OK').click.wait()
 
         #step6
-		result3=os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
+		result3 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
 		print(result3)
 
 		if int(result3) == int(result2) - 1:
@@ -127,5 +127,5 @@ class CalendarTest(unittest.TestCase):
 			assert False, 'Calendar delete failed'
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
 	unittest.main()

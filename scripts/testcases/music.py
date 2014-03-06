@@ -24,8 +24,8 @@ class MusicTest(unittest.TestCase):
               2. Exit Music app
         """ 
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Listen Now').wait.exists(timeout=5000), 'Music player launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Listen Now').wait.exists(timeout = 5000), 'Music player launch failed'
 
 
     def testOpenMusicPlayer(self):
@@ -37,20 +37,20 @@ class MusicTest(unittest.TestCase):
                4. Back to home screen, run music on background
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Listen Now').wait.exists(), 'Music player launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Listen Now').wait.exists(), 'Music player launch failed'
 
         #step2
         d.swipe(0,400,400,400,steps=10)
-        assert d(text='Playlists').wait.exists(), 'Option bar launch failed'
+        assert d(text = 'Playlists').wait.exists(), 'Option bar launch failed'
 
-        d(text='Playlists').click.wait()
-        assert d(text='Last added').wait.exists(), 'Playlists launch failed'
+        d(text = 'Playlists').click.wait()
+        assert d(text = 'Last added').wait.exists(), 'Playlists launch failed'
 
         #step3
-        d(text='Last added').click.wait()
+        d(text = 'Last added').click.wait()
         d.click(120,400)
-        assert d(description='Pause').wait.exists(), 'Music play failed'
+        assert d(description = 'Pause').wait.exists(), 'Music play failed'
 
 
     def testPlayMusicFile(self):
@@ -62,15 +62,15 @@ class MusicTest(unittest.TestCase):
               4. Repeat Step 1,2,3 for 50 cycles
         """ 
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Listen Now').wait.exists(), 'Music player launch failed'
-        assert d(description='Pause').wait.exists(), 'No music is palying' 
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Listen Now').wait.exists(), 'Music player launch failed'
+        assert d(description = 'Pause').wait.exists(), 'No music is palying' 
 
         d.click(130,900)
 
         #step2
-        assert d(description='Next').wait.exists()
-        d(description='Next').click.wait()
+        assert d(description = 'Next').wait.exists()
+        d(description = 'Next').click.wait()
 
 
     def testCloseMusicPlayer(self):
@@ -82,22 +82,22 @@ class MusicTest(unittest.TestCase):
               4. Exit Music app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Listen Now').wait.exists(), 'Music player launch failed'
-        assert d(description='Pause').wait.exists(), 'No music is palying' 
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Listen Now').wait.exists(), 'Music player launch failed'
+        assert d(description = 'Pause').wait.exists(), 'No music is palying' 
 
         d.click(130,900)
 
         #step2
-        assert d(description='Next').wait.exists()
-        d(description='Next').click.wait()
+        assert d(description = 'Next').wait.exists()
+        d(description = 'Next').click.wait()
 
         #step3
-        d(description='Pause').click.wait()
-        assert d(description='Play').wait.exists(), 'Music pause failed'
+        d(description = 'Pause').click.wait()
+        assert d(description = 'Play').wait.exists(), 'Music pause failed'
         print('case4 finish')
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()
 

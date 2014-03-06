@@ -29,23 +29,23 @@ class TelephonyTest(unittest.TestCase):
               6. Exit Phone app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Favorites and all contacts').wait.exists(), 'Phone launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Favorites and all contacts').wait.exists(), 'Phone launch failed'
         #step2
-        d(description='Favorites and all contacts').click.wait()
+        d(description = 'Favorites and all contacts').click.wait()
         #step3,4
         for i in range (random.randint(1,5)):
-            d.swipe(196,700,196,180,steps=10)
+            d.swipe(196,700,196,180,steps = 10)
       
         for i in range (random.randint(1,5)):
-            d.swipe(196,180,196,700,steps=10)
+            d.swipe(196,180,196,700,steps = 10)
 
         d.click(random.randint(130,370),random.randint(217,871))
-        assert d(text='Dialing').wait.exists(timeout=15000), 'Not start to call'
-        assert d(textContains='0:').wait.exists(timeout=15000), 'Call is not connected'
+        assert d(text = 'Dialing').wait.exists(timeout = 15000), 'Not start to call'
+        assert d(textContains = '0:').wait.exists(timeout = 15000), 'Call is not connected'
         #step5
-        d(description='End').click.wait()
-        assert d(description='Favorites and all contacts').wait.exists(), 'Call end failed'
+        d(description = 'End').click.wait()
+        assert d(description = 'Favorites and all contacts').wait.exists(), 'Call end failed'
 
 
     def testCallFromCallLog(self):
@@ -59,24 +59,24 @@ class TelephonyTest(unittest.TestCase):
               5. Exit Phone app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Call log').wait.exists(), 'Phone launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Call log').wait.exists(), 'Phone launch failed'
         #step2
-        d(description='Call log').click.wait()
-        assert d(textContains='test').wait.exists(), 'no callLog'
+        d(description = 'Call log').click.wait()
+        assert d(textContains = 'test').wait.exists(), 'no callLog'
         #step3
-        d(textContains='test').click.wait()
-        assert d(textContains='Call').wait.exists(), 'callLog detail launched'
+        d(textContains = 'test').click.wait()
+        assert d(textContains = 'Call').wait.exists(), 'callLog detail launched'
 
-        d(textContains='Call').click.wait()
+        d(textContains = 'Call').click.wait()
 
-        assert d(text='Dialing').wait.exists(timeout=15000), 'Not start to call'
-        assert d(textContains='0:').wait.exists(timeout=15000), 'Call is not connected'
+        assert d(text = 'Dialing').wait.exists(timeout = 15000), 'Not start to call'
+        assert d(textContains = '0:').wait.exists(timeout = 15000), 'Call is not connected'
         #step4
-        d(description='End').click.wait()
-        assert d(description='Call log').wait.exists(), 'Call end failed'
+        d(description = 'End').click.wait()
+        assert d(description = 'Call log').wait.exists(), 'Call end failed'
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()
 
 

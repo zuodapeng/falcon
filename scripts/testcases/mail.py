@@ -35,33 +35,33 @@ class MailTest(unittest.TestCase):
               7.Exit email app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Compose').wait.exists(), 'Email launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Compose').wait.exists(), 'Email launch failed'
 
         #step2
-        d(description='Show all folders').click.wait()
-        d(text='Sent').click.wait()
-        while d(descriptionContains='Subject').wait.exists():
+        d(description = 'Show all folders').click.wait()
+        d(text = 'Sent').click.wait()
+        while d(descriptionContains = 'Subject').wait.exists():
             d.click(30,170)
-            d(description='Delete').click.wait(timeout=1000)
+            d(description = 'Delete').click.wait(timeout = 1000)
 
         #step3
-        os.system('adb shell am start -a android.intent.action.SEND -d mailto:'+ RECEIVER_ADDRESS +' --es android.intent.extra.SUBJECT '+SUBJECT+' --es android.intent.extra.TEXT '+CONTEXT+' -n com.android.email/.activity.MessageCompose')
-        assert d(text='Compose').wait.exists()
+        os.system('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
+        assert d(text = 'Compose').wait.exists()
 
         #step4
-        d(description='Send').click.wait(timeout=3000)
+        d(description = 'Send').click.wait(timeout = 3000)
 
         #step5
-        d(description='Show all folders').click.wait()
-        d(text='Sent').click.wait()
-        assert d(descriptionContains='Subject').wait.exists(timeout=90), 'Email sent failed'
+        d(description = 'Show all folders').click.wait()
+        d(text = 'Sent').click.wait()
+        assert d(descriptionContains = 'Subject').wait.exists(timeout = 90), 'Email sent failed'
 
         #step6
-        d(descriptionContains='Subject').long_click().wait()
-        assert d(description='Delete').wait.exists(), 'Email did not selected'
-        d(description='Delete').click.wait()
-        assert d(text='No messages').wait.exists, 'Email delete failed'
+        d(descriptionContains = 'Subject').long_click().wait()
+        assert d(description = 'Delete').wait.exists(), 'Email did not selected'
+        d(description = 'Delete').click.wait()
+        assert d(text = 'No messages').wait.exists, 'Email delete failed'
 
     def testMailSendwithAttachment(self):
 
@@ -76,33 +76,33 @@ class MailTest(unittest.TestCase):
               7.Exit email app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Compose').wait.exists(), 'Email launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Compose').wait.exists(), 'Email launch failed'
 
         #step2
-        d(description='Show all folders').click.wait()
-        d(text='Sent').click.wait()
-        while d(descriptionContains='Subject').wait.exists():
+        d(description = 'Show all folders').click.wait()
+        d(text = 'Sent').click.wait()
+        while d(descriptionContains = 'Subject').wait.exists():
             d.click(30,170)
-            d(description='Delete').click.wait(timeout=1000)
+            d(description = 'Delete').click.wait(timeout = 1000)
 
         #step3
-        os.system('adb shell am start -a android.intent.action.SEND -d mailto:'+ RECEIVER_ADDRESS +' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT '+SUBJECT+' --es android.intent.extra.TEXT '+CONTEXT+' -n com.android.email/.activity.MessageCompose')
-        assert d(text='Compose').wait.exists(), 'Email with attachment create failed'
+        os.system('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
+        assert d(text = 'Compose').wait.exists(), 'Email with attachment create failed'
 
         #step4
-        d(description='Send').click.wait(timeout=3000)
+        d(description = 'Send').click.wait(timeout = 3000)
 
         #step5
-        d(description='Show all folders').click.wait()
-        d(text='Sent').click.wait()
-        assert d(descriptionContains='Subject').wait.exists(timeout=90), 'Email sent failed'
+        d(description = 'Show all folders').click.wait()
+        d(text = 'Sent').click.wait()
+        assert d(descriptionContains = 'Subject').wait.exists(timeout = 90), 'Email sent failed'
 
         #step6
-        d(descriptionContains='Subject').long_click().wait()
-        assert d(description='Delete').wait.exists(), 'Email did not selected'
-        d(description='Delete').click.wait()
-        assert d(text='No messages').wait.exists, 'Email delete failed'
+        d(descriptionContains = 'Subject').long_click().wait()
+        assert d(description = 'Delete').wait.exists(), 'Email did not selected'
+        d(description = 'Delete').click.wait()
+        assert d(text = 'No messages').wait.exists, 'Email delete failed'
 
     def testOpenMail(self):
         """
@@ -118,43 +118,43 @@ class MailTest(unittest.TestCase):
               9.Exit mail app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(description='Compose').wait.exists(), 'Email launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(description = 'Compose').wait.exists(), 'Email launch failed'
 
         #step2
-        d(description='Show all folders').click.wait()
-        d(text='Drafts').click.wait()
-        while d(descriptionContains='Subject').wait.exists():
+        d(description = 'Show all folders').click.wait()
+        d(text = 'Drafts').click.wait()
+        while d(descriptionContains = 'Subject').wait.exists():
             d.click(30,170)
-            d(description='Delete').click.wait(timeout=1000)
+            d(description = 'Delete').click.wait(timeout = 1000)
 
         #step3
-        os.system('adb shell am start -a android.intent.action.SEND -d mailto:'+ RECEIVER_ADDRESS +' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT '+SUBJECT+' --es android.intent.extra.TEXT '+CONTEXT+' -n com.android.email/.activity.MessageCompose')
-        assert d(text='Compose').wait.exists(), 'Email with attachment create failed'
+        os.system('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
+        assert d(text = 'Compose').wait.exists(), 'Email with attachment create failed'
 
         #step4
         d.press('back')
         d.press('back')
 
         #step5
-        d(description='Show all folders').click.wait()
-        d(text='Drafts').click.wait()
+        d(description = 'Show all folders').click.wait()
+        d(text = 'Drafts').click.wait()
 
         #step6
-        assert d(descriptionContains='Subject').wait.exists(), 'No Email in Drafts'
+        assert d(descriptionContains = 'Subject').wait.exists(), 'No Email in Drafts'
 
         #step7
-        d(descriptionContains='Subject').click.wait()
-        assert d(description='Send').wait.exists(), 'Email open failed'
+        d(descriptionContains = 'Subject').click.wait()
+        assert d(description = 'Send').wait.exists(), 'Email open failed'
 
         #step8
         d.press('back')
         d.press('back')
-        d(descriptionContains='Subject').long_click().wait()
-        assert d(description='Delete').wait.exists(), 'Email did not selected'
-        d(description='Delete').click.wait()
-        assert d(text='No messages').wait.exists, 'Email delete failed'
+        d(descriptionContains = 'Subject').long_click().wait()
+        assert d(description = 'Delete').wait.exists(), 'Email did not selected'
+        d(description = 'Delete').click.wait()
+        assert d(text = 'No messages').wait.exists, 'Email delete failed'
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()

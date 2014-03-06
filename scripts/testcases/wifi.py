@@ -28,23 +28,23 @@ class MusicTest(unittest.TestCase):
               4. Exit Settings app
         """
         #step1
-        os.system('adb shell am start '+self.runComponent)
-        assert d(text='Settings').wait.exists(), 'Setting launch failed'
+        os.system('adb shell am start ' + self.runComponent)
+        assert d(text = 'Settings').wait.exists(), 'Setting launch failed'
 
         #step2,3
-        d(text='Wi-Fi').click.wait()
-        if d(text='To see available networks, turn Wi-Fi on.').wait.exists():
-            d(text='OFF').click.wait()
-            assert d(text='ON').wait.exists(), 'Wi-Fi turn on failed'
-            d(text='ON').click.wait()
-            assert d(text='OFF').wait.exists(), 'Wi-Fi turn off failed'
+        d(text = 'Wi-Fi').click.wait()
+        if d(text = 'To see available networks, turn Wi-Fi on.').wait.exists():
+            d(text = 'OFF').click.wait()
+            assert d(text = 'ON').wait.exists(), 'Wi-Fi turn on failed'
+            d(text = 'ON').click.wait()
+            assert d(text = 'OFF').wait.exists(), 'Wi-Fi turn off failed'
         else:
-            d(text='ON').click.wait()
-            assert d(text='OFF').wait.exists(), 'Wi-Fi turn off failed'
-            d(text='OFF').click.wait()
-            assert d(text='ON').wait.exists(), 'Wi-Fi turn on failed'
-            d(text='ON').click.wait()
-            assert d(text='OFF').wait.exists(), 'Wi-Fi turn off failed'
+            d(text = 'ON').click.wait()
+            assert d(text = 'OFF').wait.exists(), 'Wi-Fi turn off failed'
+            d(text = 'OFF').click.wait()
+            assert d(text = 'ON').wait.exists(), 'Wi-Fi turn on failed'
+            d(text = 'ON').click.wait()
+            assert d(text = 'OFF').wait.exists(), 'Wi-Fi turn off failed'
 
         """
         if d(text='Wi-Fi').right(text='ON').wait.exists():
@@ -61,5 +61,5 @@ class MusicTest(unittest.TestCase):
         """
 
 
-if __name__ =='__main__':  
+if __name__ == '__main__':  
     unittest.main()
