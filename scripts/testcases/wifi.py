@@ -5,9 +5,9 @@ import unittest, os, time
 PACKAGE_NAME = 'com.android.settings'
 ACTIVITY_NAME = PACKAGE_NAME + '.Settings'
 
-class MusicTest(unittest.TestCase):
+class WifiTest(unittest.TestCase):
     def setUp(self):
-        super(MusicTest, self).setUp()
+        super(WifiTest, self).setUp()
         self.runComponent = PACKAGE_NAME + '/' + ACTIVITY_NAME
 
     def tearDown(self):
@@ -15,7 +15,7 @@ class MusicTest(unittest.TestCase):
         d.press('back')
         d.press('back')
         d.press('home')
-        super(MusicTest, self).tearDown()
+        super(WifiTest, self).tearDown()
 
     def testWifiOpenAndClose(self):
         """
