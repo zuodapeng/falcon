@@ -5,9 +5,9 @@ import unittest, os
 PACKAGE_NAME = 'com.android.soundrecorder'
 ACTIVITY_NAME = '.SoundRecorder'
 
-class ContactTest(unittest.TestCase):
+class SoundrecordTest(unittest.TestCase):
     def setUp(self):
-        super(ContactTest, self).setUp()
+        super(SoundrecordTest, self).setUp()
         self.runComponent = PACKAGE_NAME + '/' + ACTIVITY_NAME
 
     def tearDown(self):
@@ -15,7 +15,7 @@ class ContactTest(unittest.TestCase):
         d.press('back')
         d.press('back')
         d.press('home')
-        super(ContactTest, self).tearDown()
+        super(SoundrecordTest, self).tearDown()
 
     def testRecordMessage(self):       
         """
