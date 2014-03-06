@@ -1,14 +1,20 @@
 #!/usr/bin/env python
 
 from uiautomator import device as d
+import unittest, os, commands
 
-import unittest, os
-
-
+#alarm package/activity name
 PACKAGE_NAME = 'com.google.android.deskclock'
 ACTIVITY_NAME = 'com.android.deskclock.DeskClock'
 
-QUERY_ALARM_COUNT_COMMANDS = 'adb shell sqlite3 /data/data/com.google.android.deskclock/databases/alarms.db "select count(*) from alarm"'
+#get alarm count
+QUERY_ALARM_COUNT_COMMANDS = 'adb shell sqlite3 /data/data/com.google.android.deskclock/databases/alarms.db "select count(*) from alarms"'
+
+#for delete alarm
+startX = 45
+startY = 158
+endX = 500
+endY = 158
 
 class AlarmTest(unittest.TestCase):
     def setUp(self):
@@ -34,25 +40,33 @@ class AlarmTest(unittest.TestCase):
                 5.Add alarm
         '''
         #step1
-        os.system('adb shell am start ' + self.runComponent)
-    	assert d(description = 'Alarms').wait.exists(), 'Clock launch failed'
+        #os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
+        assert d(description = 'Alarms').wait.exists(), 'Clock launch failed'
 
-    	d(description = 'Alarms').click.wait()
-    	assert d(text = 'Alarms').wait.exists(), 'Alarm launch failed'
+        d(description = 'Alarms').click.wait()
+        assert d(text = 'Alarms').wait.exists(), 'Alarm launch failed'
 
         #step2
-    	result1 = os.popen(QUERY_ALARM_COUNT_COMMANDS)
+        #BEFORE_DELETE = os.popen(QUERY_ALARM_COUNT_COMMANDS)
+        BEFORE_DELETE = commands.getoutput(QUERY_ALARM_COUNT_COMMANDS)
 
-    	#step3,4
-    	for i in range(0,int(result1.read())):
-    		d.swipe(45,158,500,158,steps=10)
-    		assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
+        #step3,4
+        for i in range(0, int(BEFORE_DELETE)):
+            d.swipe(startX,startY,endX,endY,steps = 10)
+            assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
+            
+        #AFTER_DELETE = os.popen(QUERY_ALARM_COUNT_COMMANDS)
+        AFTER_DELETE = commands.getoutput(QUERY_ALARM_COUNT_COMMANDS)
+        assert int(AFTER_DELETE) == 0, 'Still exist alarm'
 
-    	#step5
-    	d(description = 'Add alarm').click.wait()
-    	d(text = 'Cancel').click.wait()
 
-    	assert d(text = '12').wait.exists(), 'Alarm create failed'
+        #step5
+        d(description = 'Add alarm').click.wait()
+        d(text = 'Cancel').click.wait()
+
+        assert d(text = ':00').wait.exists(), 'Alarm create failed'
+
 
 
     def testAlarmDelete(self):
@@ -65,20 +79,20 @@ class AlarmTest(unittest.TestCase):
                 4.Delete an alarm
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'Alarms').wait.exists(), 'Clock launch failed'
 
         d(description = 'Alarms').click.wait()
         assert d(text = 'Alarms').wait.exists(), 'Alarm launch failed'
 
         #step2,3
-        result1 = os.popen(QUERY_ALARM_COUNT_COMMANDS)
-        if int(result1.read()) == 0:
+        ALARM_COUNT = commands.getoutput(QUERY_ALARM_COUNT_COMMANDS)
+        if int(ALARM_COUNT) == 0:
             d(description = 'Add alarm').click.wait()
             d(text = 'Cancel').click.wait()
 
         #step4
-        d.swipe(45,158,500,158,steps = 10)
+        d.swipe(startX,startY,endX,endY,steps = 10)
         assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
         
 
