@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, time
+import unittest, os, time, commands
 
 PACKAGE_NAME = 'com.android.settings'
 ACTIVITY_NAME = PACKAGE_NAME + '.Settings'
@@ -28,7 +28,7 @@ class WifiTest(unittest.TestCase):
               4. Exit Settings app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Settings').wait.exists(), 'Setting launch failed'
 
         #step2,3
