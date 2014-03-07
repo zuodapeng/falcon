@@ -53,7 +53,7 @@ class AlarmTest(unittest.TestCase):
 
         #step3,4
         for i in range(0, int(BEFORE_DELETE)):
-            d.swipe(startX,startY,endX,endY,steps = 10)
+            d.swipe(startX, startY, endX, endY, steps = 10)
             assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
             
         #AFTER_DELETE = os.popen(QUERY_ALARM_COUNT_COMMANDS)
@@ -92,7 +92,7 @@ class AlarmTest(unittest.TestCase):
             d(text = 'Cancel').click.wait()
 
         #step4
-        d.swipe(startX,startY,endX,endY,steps = 10)
+        d.swipe(startX, startY, endX, endY, steps = 10)
         assert d(text = 'Alarm deleted.'), 'Alarm delete failed'
         
 

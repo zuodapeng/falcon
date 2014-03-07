@@ -2,7 +2,7 @@
 
 from uiautomator import device as d
 
-import unittest, os
+import unittest, os, commands
 
 
 PACKAGE_NAME = 'com.android.browser'
@@ -30,7 +30,7 @@ class BrowserTest(unittest.TestCase):
         Steps:1.Launch Browser and check launch successfully
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         d.press('menu')
     	assert d(text = 'Bookmarks').wait.exists(), 'Browser launch failed'
 

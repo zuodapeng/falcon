@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, random, time
+import unittest, os, random, time, commands
 
 PACKAGE_NAME = 'com.google.android.calendar'
 ACTIVITY_NAME = 'com.android.calendar.AllInOneActivity'
@@ -12,21 +12,21 @@ EVENT_NAME = 'AddEvent'
 DAY_NUMBER = random.randint(0, 27)
 
 class CalendarTest(unittest.TestCase):
-	
-	def setUp(self):
-		super(CalendarTest, self).setUp()
-		self.runComponent = PACKAGE_NAME + '/' + ACTIVITY_NAME
+    
+    def setUp(self):
+        super(CalendarTest, self).setUp()
+        self.runComponent = PACKAGE_NAME + '/' + ACTIVITY_NAME
         d.wakeup()
         d.press('home')
 
-	def tearDown(self):
-		d.press('back')
-		d.press('back')
-		d.press('home')
-		super(CalendarTest, self).tearDown()
+    def tearDown(self):
+        d.press('back')
+        d.press('back')
+        d.press('home')
+        super(CalendarTest, self).tearDown()
 
-	def testCalendarAddEvent(self):
-		"""
+    def testCalendarAddEvent(self):
+        """
         Summary:testCalendarAddEvent: Add an event in calendar.
         Steps:
                 1.Launch Calendar and check launch successfully
@@ -35,44 +35,41 @@ class CalendarTest(unittest.TestCase):
                 4.Input event name
                 5.Set event time and add event
                 6.Verify event is add successfully
-		"""
+        """
         #step1
-		os.system('adb shell am start ' + self.runComponent)
-		d.press('menu')
-		assert d(text = 'New event').wait.exists(), 'Calendar launch failed'
+        commands.getoutput('adb shell am start ' + self.runComponent)
+        d.press('menu')
+        assert d(text = 'New event').wait.exists(), 'Calendar launch failed'
 
         #step2
-		result1 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
-		print(result1)
+        BEFORE_ADD = commands.getoutput(QUERY_EVENTS_COUNT_COMMANDS)
+        print(BEFORE_ADD)
 
         #step3
-		d(text = 'New event').click.wait()
-		assert d(text = 'Done').wait.exists(), 'Calendar create failed'
+        d(text = 'New event').click.wait()
+        assert d(text = 'Done').wait.exists(), 'Calendar create failed'
 
         #step4
-		d(text = 'Event name').set_text(EVENT_NAME)
+        d(text = 'Event name').set_text(EVENT_NAME)
 
         #step5
-		d.click(73,415)
-		d(index = DAY_NUMBER, className = 'com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
-		d.click(275,875)
-		#d(text='Done', className='android.widget.Button').wait.click()
-		time.sleep(1)
-		d.click(400,75)
-		#d(text='Done', className='android.widget.TextView').wait.click()
-		time.sleep(2)
+        d(description = 'Start date').click.wait()
+        d(index = DAY_NUMBER, className = 'com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
+        #d.click(275,875)
+        d(text = 'Done', className = 'android.widget.Button').click.wait()
+        time.sleep(1)
+        #d.click(400,75)
+        d(text = 'Done', className = 'android.widget.TextView').click.wait()
+        time.sleep(2)
 
         #step6
-		result2 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
-		print(result2)
+        AFTER_ADD = commands.getoutput(QUERY_EVENTS_COUNT_COMMANDS)
+        print(AFTER_ADD)
 
-		if int(result2) == int(result1) + 1:
-			assert True
-		else:
-			assert False, 'Calendar add failed'
+        assert int(AFTER_ADD) == int(BEFORE_ADD) + 1, 'Calendar add failed'
 
-	def testCalendarDeleteEvent(self):
-		"""
+    def testCalendarDeleteEvent(self):
+        """
         Summary:testCalendarAddEvent: Add an event in calendar.
         Steps:
                 1.Launch Calendar and check launch successfully
@@ -81,51 +78,51 @@ class CalendarTest(unittest.TestCase):
                 4.Enter envent
                 5.Touch delete icon
                 6.Verify event number is delete successfully
-		"""
+        """
         #step1
-		os.system('adb shell am start ' + self.runComponent)
-		d.press('menu')
-		assert d(text = 'New event').wait.exists(), 'Calendar launch failed'
+        commands.getoutput('adb shell am start ' + self.runComponent)
+        d.press('menu')
+        assert d(text = 'New event').wait.exists(), 'Calendar launch failed'
 
         #step2
-		result1 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
-		print(result1)
+        BEFORE_DELETE = commands.getoutput(QUERY_EVENTS_COUNT_COMMANDS)
+        print(BEFORE_DELETE)
 
-		if int(result1) == 0:
-			d(text = 'New event').click.wait()
-			d(text = 'Event name').set_text(EVENT_NAME)
-			d.click(73,415)
-			d(index = DAY_NUMBER, className = 'com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
-			d.click(275,875)
-			time.sleep(1)
-			d.click(400,75)
-			time.sleep(2)
-		else:
-			d.press('back')
+        if int(BEFORE_DELETE) == 0:
+            d(text = 'New event').click.wait()
+            d(text = 'Event name').set_text(EVENT_NAME)
+            #d.click(73,415)
+            d(description = 'Start date').click.wait()
+            d(index = DAY_NUMBER, className = 'com.android.datetimepicker.date.SimpleMonthAdapter$CalendarDay').click.wait()
+            #d.click(275,875)
+            d(text = 'Done', className = 'android.widget.Button').click.wait()
+            time.sleep(1)
+            #d.click(400,75)
+            d(text = 'Done', className = 'android.widget.TextView').click.wait()
+            time.sleep(2)
+        else:
+            d.press('back')
 
-		result2 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
-		print(result2)
+        BEFORE_DELETE2 = commands.getoutput(QUERY_EVENTS_COUNT_COMMANDS)
+        print(BEFORE_DELETE2)
 
         #step3
-		d(index = 0, className = 'android.widget.Spinner').click.wait()
-		d(text = 'Agenda').click.wait()
+        d(index = 0, className = 'android.widget.Spinner').click.wait()
+        d(text = 'Agenda').click.wait()
 
         #step4
-		d(text = 'AddEvent').click.wait()
+        d(text = 'AddEvent').click.wait()
 
         #step5
-		d(description = 'Delete').click.wait()
-		d(text = 'OK').click.wait()
+        d(description = 'Delete').click.wait()
+        d(text = 'OK').click.wait()
 
         #step6
-		result3 = os.popen(QUERY_EVENTS_COUNT_COMMANDS).read()
-		print(result3)
+        AFTER_DELETE = commands.getoutput(QUERY_EVENTS_COUNT_COMMANDS)
+        print(AFTER_DELETE)
 
-		if int(result3) == int(result2) - 1:
-			assert True
-		else:
-			assert False, 'Calendar delete failed'
+        assert int(AFTER_DELETE) == int(BEFORE_DELETE2) - 1, 'Calendar delete failed'
 
 
 if __name__ == '__main__':  
-	unittest.main()
+    unittest.main()
