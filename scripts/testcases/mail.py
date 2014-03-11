@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os
+import unittest, os, commands
 
 PACKAGE_NAME = 'com.android.email'
 ACTIVITY_NAME = PACKAGE_NAME + '.activity.Welcome'
@@ -35,7 +35,7 @@ class MailTest(unittest.TestCase):
               7.Exit email app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'Compose').wait.exists(), 'Email launch failed'
 
         #step2
@@ -46,7 +46,7 @@ class MailTest(unittest.TestCase):
             d(description = 'Delete').click.wait(timeout = 1000)
 
         #step3
-        os.system('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
         assert d(text = 'Compose').wait.exists()
 
         #step4
@@ -55,7 +55,7 @@ class MailTest(unittest.TestCase):
         #step5
         d(description = 'Show all folders').click.wait()
         d(text = 'Sent').click.wait()
-        assert d(descriptionContains = 'Subject').wait.exists(timeout = 90), 'Email sent failed'
+        assert d(descriptionContains = 'Subject').wait.exists(timeout = 90000), 'Email sent failed'
 
         #step6
         d(descriptionContains = 'Subject').long_click().wait()
@@ -76,7 +76,7 @@ class MailTest(unittest.TestCase):
               7.Exit email app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'Compose').wait.exists(), 'Email launch failed'
 
         #step2
@@ -87,7 +87,7 @@ class MailTest(unittest.TestCase):
             d(description = 'Delete').click.wait(timeout = 1000)
 
         #step3
-        os.system('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
         assert d(text = 'Compose').wait.exists(), 'Email with attachment create failed'
 
         #step4
@@ -96,7 +96,7 @@ class MailTest(unittest.TestCase):
         #step5
         d(description = 'Show all folders').click.wait()
         d(text = 'Sent').click.wait()
-        assert d(descriptionContains = 'Subject').wait.exists(timeout = 90), 'Email sent failed'
+        assert d(descriptionContains = 'Subject').wait.exists(timeout = 90000), 'Email sent failed'
 
         #step6
         d(descriptionContains = 'Subject').long_click().wait()
@@ -118,7 +118,7 @@ class MailTest(unittest.TestCase):
               9.Exit mail app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'Compose').wait.exists(), 'Email launch failed'
 
         #step2
@@ -129,7 +129,7 @@ class MailTest(unittest.TestCase):
             d(description = 'Delete').click.wait(timeout = 1000)
 
         #step3
-        os.system('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -d mailto:' + RECEIVER_ADDRESS + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg --es android.intent.extra.SUBJECT ' + SUBJECT + ' --es android.intent.extra.TEXT ' + CONTEXT + ' -n com.android.email/.activity.MessageCompose')
         assert d(text = 'Compose').wait.exists(), 'Email with attachment create failed'
 
         #step4

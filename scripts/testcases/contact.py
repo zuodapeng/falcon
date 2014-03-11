@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, random
+import unittest, os, random, commands
 
 PACKAGE_NAME = 'com.android.contacts'
 ACTIVITY_NAME = PACKAGE_NAME + '.activities.PeopleActivity'
@@ -33,9 +33,9 @@ class ContactTest(unittest.TestCase):
           4. Touch Done button
           5. Exit Contacts app
         """
-        result1 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        BEFORE_ADD = commands.getoutput(GET_CONTACT_COUNT_COMMAND)
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'All contacts').wait.exists(), 'Contact launch failed'
         d(description = 'All contacts').click.wait()
 
@@ -49,12 +49,9 @@ class ContactTest(unittest.TestCase):
         #step4
         d(text = 'Done').click.wait()
 
-        result2 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        AFTER_ADD = commands.getoutput(GET_CONTACT_COUNT_COMMAND)
 
-        if int(result2) == int(result1) + 1:
-            assert True
-        else:
-            assert False, 'Contact add failed'
+        assert int(AFTER_ADD) == int(BEFORE_ADD) + 1, 'Contact add failed'
 
     def testDeleteContact(self):
         """
@@ -67,9 +64,9 @@ class ContactTest(unittest.TestCase):
               3. Delete the contact
               4. Exit Contacts app
         """
-        result1 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        BEFORE_DELETE = commands.getoutput(GET_CONTACT_COUNT_COMMAND)
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'All contacts').wait.exists(), 'Contact launch failed'
         d(description = 'All contacts').click.wait()
 
@@ -81,12 +78,9 @@ class ContactTest(unittest.TestCase):
         d(text = 'Delete').click.wait()
         d(text = 'OK').click.wait()
 
-        result2 = os.popen(GET_CONTACT_COUNT_COMMAND).read()
+        AFTER_DELETE = commands.getoutput(GET_CONTACT_COUNT_COMMAND)
 
-        if int(result2) == int(result1) - 1:
-            assert True
-        else:
-            assert False, 'Contact delete failed'
+        assert int(AFTER_DELETE) == int(BEFORE_DELETE) - 1, 'Contact delete failed'
 
 
 if __name__ == '__main__':  

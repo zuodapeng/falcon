@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, time
+import unittest, os, time, commands
 
 PACKAGE_NAME = 'com.android.mms'
 ACTIVITY_NAME = '.ui.ConversationList'
@@ -33,13 +33,13 @@ class MessagesTest(unittest.TestCase):
               6. Exit Messages app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
         #step2,3
-        os.system('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' -n com.android.mms/.ui.ComposeMessageActivity')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
 
         #step4
@@ -96,13 +96,13 @@ class MessagesTest(unittest.TestCase):
               9. Exit Messages app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
         #step2,3,4,5,6
-        os.system('adb shell am start -a android.intent.action.SEND -t video/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -t video/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
         assert d(text = 'View').wait.exists(), 'message create failed'
 
         #step7
@@ -128,13 +128,13 @@ class MessagesTest(unittest.TestCase):
               9. Exit Messages app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
         #step2,3,4,5,6
-        os.system('adb shell am start -a android.intent.action.SEND -t image/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -t image/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
         assert d(text = 'View').wait.exists(), 'message create failed'
 
         #step7
@@ -159,12 +159,12 @@ class MessagesTest(unittest.TestCase):
               
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
-        os.system('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' -n com.android.mms/.ui.ComposeMessageActivity')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND  --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
         d.press('back')
 
@@ -229,12 +229,12 @@ class MessagesTest(unittest.TestCase):
               
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
-        os.system('adb shell am start -a android.intent.action.SEND -t video/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -t video/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Video.3gp -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
         d.press('back')
 
@@ -260,12 +260,12 @@ class MessagesTest(unittest.TestCase):
               4.Exit message app      
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Messaging').wait.exists(), 'Message launch failed'
 
         self._clearMessage()
 
-        os.system('adb shell am start -a android.intent.action.SEND -t image/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
+        commands.getoutput('adb shell am start -a android.intent.action.SEND -t image/* --es address ' + MESSAGE_RECEIVER_NUMBER + ' --es sms_body ' + SEND_MESSAGE_CONTENT + ' --eu android.intent.extra.STREAM file:///mnt/sdcard/001/300K/Picture.jpg -n com.android.mms/.ui.ComposeMessageActivity')
         time.sleep(2)
         d.press('back')
 

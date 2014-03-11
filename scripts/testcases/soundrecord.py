@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os
+import unittest, os, commands
 
 PACKAGE_NAME = 'com.android.soundrecorder'
 ACTIVITY_NAME = '.SoundRecorder'
@@ -28,7 +28,7 @@ class SoundrecordTest(unittest.TestCase):
               5. Exit Music app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Record your message').wait.exists(), 'SoundRecorder launch failed'
 
         #Step2

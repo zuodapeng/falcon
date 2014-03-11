@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, random
+import unittest, os, random, commands
 
 PACKAGE_NAME = 'com.android.contacts'
 ACTIVITY_NAME = '.activities.DialtactsActivity'
@@ -29,7 +29,7 @@ class TelephonyTest(unittest.TestCase):
               6. Exit Phone app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'Favorites and all contacts').wait.exists(), 'Phone launch failed'
         #step2
         d(description = 'Favorites and all contacts').click.wait()
@@ -59,7 +59,7 @@ class TelephonyTest(unittest.TestCase):
               5. Exit Phone app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(description = 'Call log').wait.exists(), 'Phone launch failed'
         #step2
         d(description = 'Call log').click.wait()

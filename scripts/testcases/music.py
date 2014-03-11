@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, time
+import unittest, os, time, commands
 
 PACKAGE_NAME = 'com.google.android.music'
 ACTIVITY_NAME = 'com.android.music.activitymanagement.TopLevelActivity'
@@ -24,7 +24,7 @@ class MusicTest(unittest.TestCase):
               2. Exit Music app
         """ 
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Listen Now').wait.exists(timeout = 5000), 'Music player launch failed'
 
 
@@ -37,7 +37,7 @@ class MusicTest(unittest.TestCase):
                4. Back to home screen, run music on background
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Listen Now').wait.exists(), 'Music player launch failed'
 
         #step2
@@ -62,7 +62,7 @@ class MusicTest(unittest.TestCase):
               4. Repeat Step 1,2,3 for 50 cycles
         """ 
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Listen Now').wait.exists(), 'Music player launch failed'
         assert d(description = 'Pause').wait.exists(), 'No music is palying' 
 
@@ -82,7 +82,7 @@ class MusicTest(unittest.TestCase):
               4. Exit Music app
         """
         #step1
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Listen Now').wait.exists(), 'Music player launch failed'
         assert d(description = 'Pause').wait.exists(), 'No music is palying' 
 

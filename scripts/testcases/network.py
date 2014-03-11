@@ -1,6 +1,6 @@
 from uiautomator import device as d
 
-import unittest, os, random
+import unittest, os, random, commands
 
 NETWORK_PACKAGE_NAME = 'com.android.phone'
 
@@ -25,7 +25,7 @@ class NetworkTest(unittest.TestCase):
               2. Check if in 2G mode
               3. If not enter only 2G mode
         """
-        os.system('adb shell am start ' + self.runComponent)
+        commands.getoutput('adb shell am start ' + self.runComponent)
         assert d(text = 'Mobile network settings').wait.exists(), 'Mobile network settings launch failed'
 
         if d(text = 'Use only 2G networks').right(checked = 'true').wait.exists():

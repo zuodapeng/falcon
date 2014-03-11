@@ -35,8 +35,8 @@ class AlarmTest(unittest.TestCase):
         Steps:
                 1.Launch alarm and check launch successfully
                 2.Get alarm number
-                3.Verify alarm is exist or inexistence
-                4.If exist alarm, delete it
+                3.Verify alarm is exist or not
+                4.If exist, delete it
                 5.Add alarm
         '''
         #step1
@@ -74,8 +74,8 @@ class AlarmTest(unittest.TestCase):
         Summary:testAlarmDelete: Delete an alarm.
         Steps:
                 1.Launch alarm and check launch successfully
-                2.Verify alarm is with or without
-                3.Exist is pass, inexistence is add an alarm
+                2.Verify alarm is exist or not
+                3.If no alarm, then add one
                 4.Delete an alarm
         """
         #step1
